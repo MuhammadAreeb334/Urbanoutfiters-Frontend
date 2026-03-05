@@ -1,9 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
+import Home from "./pages/Home";
 
-const Home = () => <div className="p-20 text-center font-bold text-3xl">HOMEPAGE CONTENT</div>;
-const CategoryPage = () => <div className="p-20 text-center text-2xl uppercase tracking-widest">Category View</div>;
-const ProductDetail = () => <div className="p-20 text-center">Product Detail View</div>;
+const CategoryPage = () => (
+  <div className="p-20 text-center text-2xl uppercase tracking-widest">
+    Category View
+  </div>
+);
+const ProductDetail = () => (
+  <div className="p-20 text-center">Product Detail View</div>
+);
 const Cart = () => <div className="p-20 text-center">Shopping Bag</div>;
 
 function App() {
