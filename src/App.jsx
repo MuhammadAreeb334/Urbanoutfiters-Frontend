@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import CategoryPage from "./pages/CategoryPage";
-
+import CategoryPageWrapper from "./components/layout/CategoryPageWrapper";
 
 const ProductDetail = () => (
   <div className="p-20 text-center">Product Detail View</div>
@@ -16,7 +16,10 @@ function App() {
         <Route index element={<Home />} />
 
         {/* Dynamic Category Route for the Main Nav (Women's, Men's, etc.) */}
-        <Route path="categories/:categoryName" element={<CategoryPage />} />
+        <Route
+          path="categories/:categoryName"
+          element={<CategoryPageWrapper />}
+        />
 
         {/* Specific Sale Route (often styled differently) */}
         <Route path="sale" element={<CategoryPage />} />
