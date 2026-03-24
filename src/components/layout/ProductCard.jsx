@@ -11,12 +11,15 @@ const ProductCard = ({ product, showSwatches = true, showSale = true }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${product.id}`)
-  }
+    navigate(`/product/${product.id}`);
+  };
 
   return (
-    <div onClick={handleClick} className="flex flex-col min-w-[250px] group">
-      <div className="relative overflow-hidden aspect-[3/4] bg-gray-100">
+    <div className="flex flex-col min-w-[250px] group">
+      <div
+        onClick={handleClick}
+        className="relative overflow-hidden aspect-[3/4] bg-gray-100"
+      >
         <img
           src={selectedColor?.main}
           alt={product.title}

@@ -1,4 +1,3 @@
-// src/context/CartContext.jsx
 import React, { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
@@ -6,30 +5,27 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Add product to cart
   const addToCart = (product, selectedColor, selectedSize, quantity = 1) => {
     setCartItems((prev) => {
       const existing = prev.find(
         (item) =>
           item.id === product.id &&
           item.color === selectedColor &&
-          item.size === selectedSize
+          item.size === selectedSize,
       );
 
       if (existing) {
-        // Increase quantity if already exists
         return prev.map((item) =>
           item.id === product.id &&
           item.color === selectedColor &&
           item.size === selectedSize
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
       }
 
-      // Safely get the image of the selected color
       const colorObj = product.colors.find((c) => c.name === selectedColor);
-      const image = colorObj?.images?.[0] || ""; // fallback to empty string if undefined
+      const image = colorObj?.main;
 
       return [
         ...prev,
@@ -37,7 +33,7 @@ export const CartProvider = ({ children }) => {
           id: product.id,
           name: product.title,
           price: product.salePrice,
-          image, // use the safely obtained image
+          image,
           color: selectedColor,
           size: selectedSize,
           quantity,
@@ -50,8 +46,8 @@ export const CartProvider = ({ children }) => {
     setCartItems((prev) =>
       prev.filter(
         (item) =>
-          !(item.id === itemId && item.color === color && item.size === size)
-      )
+          !(item.id === itemId && item.color === color && item.size === size),
+      ),
     );
   };
 
@@ -60,8 +56,8 @@ export const CartProvider = ({ children }) => {
       prev.map((item) =>
         item.id === itemId && item.color === color && item.size === size
           ? { ...item, quantity }
-          : item
-      )
+          : item,
+      ),
     );
   };
 

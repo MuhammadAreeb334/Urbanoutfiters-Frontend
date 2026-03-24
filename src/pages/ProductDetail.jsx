@@ -3,15 +3,35 @@ import { Heart, Star, ChevronDown, Plus, Minus } from "lucide-react";
 import ShippingContent from "../components/layout/ShippingContent";
 import SizeAndFitContent from "../components/layout/SizeAndFitContent";
 import ReviewsSection from "../components/layout/ReviewsSection";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { products } from "../data/products.js";
 import { useCart } from "../context/CartContext";
 
 const ProductDetail = () => {
-  const [selectedSize, setSelectedSize] = useState("M");
+  const [selectedSize, setSelectedSize] = useState("");
   const [openSection, setOpenSection] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const { addToCart } = useCart();
+  const { id } = useParams();
+
+  const product = products.find((p) => p.id === id);
+
+  if (!product) {
+    return <div className="text-center py-20">Product not found</div>;
+  }
+
+  const currentColor = product.colors.find((c) => c.name === selectedColor);
+
+  const images = currentColor?.images || [
+    currentColor?.main,
+    currentColor?.hover,
+  ];
+
+  const handleAddToCart = () => {
+    addToCart(product, selectedColor, selectedSize, 1);
+    toast.success(`${product.title} added to bag!`);
+  };
 
   useEffect(() => {
     if (product) {
@@ -36,20 +56,6 @@ const ProductDetail = () => {
       title: "Shipping + Returns",
       content: <ShippingContent />,
     },
-  ];
-
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
-
-  if (!product) {
-    return <div className="text-center py-20">Product not found</div>;
-  }
-
-  const currentColor = product.colors.find((c) => c.name === selectedColor);
-
-  const images = currentColor?.images || [
-    currentColor?.main,
-    currentColor?.hover,
   ];
 
   return (
@@ -161,7 +167,7 @@ const ProductDetail = () => {
 
           <div className="space-y-4">
             <button
-              onClick={() => addToCart(product, selectedColor, selectedSize, 1)}
+              onClick={handleAddToCart}
               className="w-full bg-[#1A1A1A] text-white py-4 font-bold text-sm uppercase tracking-widest hover:bg-[#1A1A1A]/80 transition-colors"
             >
               Get It Before It's Gone

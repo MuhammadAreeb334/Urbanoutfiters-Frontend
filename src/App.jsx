@@ -5,32 +5,59 @@ import CategoryPage from "./pages/CategoryPage";
 import CategoryPageWrapper from "./components/layout/CategoryPageWrapper";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+    <>
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 3000,
+          style: {
+            borderRadius: "0px",
+            background: "#1A1A1A",
+            color: "#fff",
+            fontSize: "12px",
+            textTransform: "uppercase",
+          },
+          iconTheme: {
+            primary: "#fff",
+            secondary: "#1A1A1A",
+          },
+        }}
+      />
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
 
-        <Route
-          path="categories/:categoryName"
-          element={<CategoryPageWrapper />}
-        />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
 
-        <Route path="sale" element={<CategoryPage />} />
+          <Route
+            path="categories/:categoryName"
+            element={<CategoryPageWrapper />}
+          />
 
-        <Route path="product/:id" element={<ProductDetail />} />
-        <Route path="cart" element={<Cart />} />
+          <Route path="sale" element={<CategoryPage />} />
 
-        <Route path="account/login" element={<div>Sign In Page</div>} />
-        <Route path="account/register" element={<div>Sign Up Page</div>} />
+          <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="cart" element={<Cart />} />
 
-        <Route
-          path="*"
-          element={<div className="p-20 text-center">404 - Page Not Found</div>}
-        />
-      </Route>
-    </Routes>
+          <Route
+            path="*"
+            element={
+              <div className="p-20 text-center font-light uppercase tracking-widest">
+                404 - Page Not Found
+              </div>
+            }
+          />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
