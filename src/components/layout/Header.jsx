@@ -73,7 +73,7 @@ const Header = () => {
               <MapPin size={18} />{" "}
               <span className="hover:text-gray-400">Stores</span>
             </div>
-            <Link to="/account/login" className="flex items-center gap-1">
+            <Link to="/login" className="flex items-center gap-1">
               <User size={18} />{" "}
               <span className="hover:text-gray-400">Sign In / Sign Up</span>
             </Link>

@@ -23,10 +23,7 @@ const ProductDetail = () => {
 
   const currentColor = product.colors.find((c) => c.name === selectedColor);
 
-  const images = currentColor?.images || [
-    currentColor?.main,
-    currentColor?.hover,
-  ];
+  const images = [currentColor?.main, currentColor?.hover];
 
   const handleAddToCart = () => {
     addToCart(product, selectedColor, selectedSize, 1);
@@ -71,11 +68,11 @@ const ProductDetail = () => {
               key={idx}
               className="relative aspect-[4/5] bg-gray-100 overflow-hidden"
             >
-              {idx === 0 && (
+              {/* {idx === 0 && (
                 <div className="absolute top-4 right-4 z-10 bg-white text-gray-500 px-2 py-1 rounded-full flex items-center gap-1 text-[12px] font-normal">
                   59 <Heart size={14} />
                 </div>
-              )}
+              )} */}
               <img
                 src={img}
                 alt={product?.title}
